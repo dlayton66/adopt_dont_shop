@@ -16,6 +16,30 @@ RSpec.describe "Application Show Page" do
       state: "CO",
       zip_code: 80020
     )
+
+    @pet_1 = Pet.create!(
+      name: "Pepper",
+      adoptable: true,
+      age: 4,
+      breed: "Pitbull",
+      shelter_id: @shelter_1.id
+    )
+
+    @pet_2 = Pet.create!(
+      name: "Pepperoni",
+      adoptable: true,
+      age: 2,
+      breed: "Corgi",
+      shelter_id: @shelter_1.id
+    )
+
+    @pet_3 = Pet.create!(
+      name: "Lemonpop",
+      adoptable: true,
+      age: 4,
+      breed: "Pitbull",
+      shelter_id: @shelter_1.id
+    )
   end
 
   describe "User Story 1" do
@@ -62,73 +86,36 @@ RSpec.describe "Application Show Page" do
       end
 
       it 'returns list of pets with exact name match' do
-        pet_1 = Pet.create!(
-          name: "Pepper",
-          adoptable: true,
-          age: 4,
-          breed: "Pitbull",
-          shelter_id: @shelter_1.id
-        )
-
         visit "/applications/#{@application_1.id}"
 
         fill_in(:search, with: "Pepper")
         click_button("Search For Pet!")
 
-        expect(page).to have_link("Pepper", href: "/pets/#{pet_1.id}")
+        expect(page).to have_link("Pepper", href: "/pets/#{@pet_1.id}")
       end
     end
   end
 
-  #As a visitor
-  # When I visit an application's show page
-  # And I search for a Pet by name
-  # And I see the names Pets that match my search
-  # Then next to each Pet's name I see a button to "Adopt this Pet"
-  # When I click one of these buttons
-  # Then I am taken back to the application show page
-  # And I see the Pet I want to adopt listed on this application
-
   describe "User story 5" do
     describe "Search a pet by name" do
-      it "has a button 'Adopt this Pet' next to the pet's name" do
-        pet_1 = Pet.create!(
-          name: "Pepper",
-          adoptable: true,
-          age: 4,
-          breed: "Pitbull",
-          shelter_id: @shelter_1.id
-        )
-         
+      it "has a button 'Adopt this Pet' next to the pet's name" do   
         visit "/applications/#{@application_1.id}"
 
         fill_in(:search, with: "Pepper")
         click_button("Search For Pet!")
 
-        expect(page).to have_button("Adopt #{pet_1.name}!")
+        expect(page).to have_button("Adopt #{@pet_1.name}!")
         
-        click_button("Adopt #{pet_1.name}!")
+        click_button("Adopt #{@pet_1.name}!")
         
         within("#application_pets") do
-          expect(page).to have_content("#{pet_1.name}")
+          expect(page).to have_content("#{@pet_1.name}")
         end
 
         expect(current_path).to eq("/applications/#{@application_1.id}")
       end
     end
   end
-
-  # As a visitor
-  # When I visit an application's show page
-  # And I have added one or more pets to the application
-  # Then I see a section to submit my application
-  # And in that section I see an input to enter why I would make a good owner for these pet(s)
-  # When I fill in that input
-  # And I click a button to submit this application
-  # Then I am taken back to the application's show page
-  # And I see an indicator that the application is "Pending"
-  # And I see all the pets that I want to adopt
-  # And I do not see a section to add more pets to this application
 
   describe "User Story 6" do
     describe "User has added pets to application" do
@@ -177,38 +164,9 @@ RSpec.describe "Application Show Page" do
     end
   end
 
-  # When I visit an application show page
-  # And I search for Pets by name
-  # Then I see any pet whose name PARTIALLY matches my search
-  # For example, if I search for "fluff", my search would match pets with names "fluffy", "fluff", and "mr. fluff"
-
   describe "User Story 8" do
     describe "Partial matches" do
       it 'can see any pet whos name partially matches the search' do
-        pet_1 = Pet.create!(
-          name: "Pepper",
-          adoptable: true,
-          age: 4,
-          breed: "Pitbull",
-          shelter_id: @shelter_1.id
-        )
-
-        pet_2 = Pet.create!(
-          name: "Pepperoni",
-          adoptable: true,
-          age: 2,
-          breed: "Corgi",
-          shelter_id: @shelter_1.id
-        )
-
-        pet_3 = Pet.create!(
-          name: "Lemonpop",
-          adoptable: true,
-          age: 4,
-          breed: "Pitbull",
-          shelter_id: @shelter_1.id
-        )
-
         visit "/applications/#{@application_1.id}"
 
         expect(page).to have_field(:search)
@@ -226,38 +184,9 @@ RSpec.describe "Application Show Page" do
     end
   end
 
-# When I visit an application show page
-# And I search for Pets by name
-# Then my search is case insensitive
-# For example, if I search for "fluff", my search would match pets with names "Fluffy", "FLUFF", and "Mr. FlUfF"
-
   describe "User story 9" do
     describe "case insensitive" do
       it 'can match pet names despite case' do
-        pet_1 = Pet.create!(
-          name: "Pepper",
-          adoptable: true,
-          age: 4,
-          breed: "Pitbull",
-          shelter_id: @shelter_1.id
-        )
-
-        pet_2 = Pet.create!(
-          name: "Pepperoni",
-          adoptable: true,
-          age: 2,
-          breed: "Corgi",
-          shelter_id: @shelter_1.id
-        )
-
-        pet_3 = Pet.create!(
-          name: "Lemonpop",
-          adoptable: true,
-          age: 4,
-          breed: "Pitbull",
-          shelter_id: @shelter_1.id
-        )
-
         visit "/applications/#{@application_1.id}"
 
         expect(page).to have_field(:search)

@@ -54,6 +54,15 @@ RSpec.describe Application, type: :model do
     it { should have_many(:pets).through(:application_pets) }
   end
 
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:street_address) }
+    it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:state) }
+    it { should validate_presence_of(:zip_code) }
+    it { should validate_numericality_of(:zip_code) }
+  end
+
   describe "#full_address" do
     it 'can create a full address' do
       expect(@application_1.full_address).to eq("123 Leaf Street, Denver, CO 80020")
@@ -79,39 +88,6 @@ RSpec.describe Application, type: :model do
       )
       
       expect(@application_1.has_pets?).to be true
-    end
-  end
-
-  describe "#approved?" do
-    it 'tells if an application is approved' do
-      seed_shelters
-      seed_pets
-      seed_applications
-      application_pet = ApplicationPet.create!(
-        application: @application_1, 
-        pet: @pet_1
-      )
-
-      expect(@application_1.approved?).to eq(false)
-
-      application_pet.update(status: "Approved")
-      
-      expect(@application_1.approved?).to eq(true)
-    end
-  end
-
-  describe "#approved_pet" do
-    it 'returns the pet that was approved' do
-      seed_shelters
-      seed_pets
-      seed_applications
-      application_pet = ApplicationPet.create!(
-        application: @application_1, 
-        pet: @pet_1
-      )
-
-      application_pet.update(status: "Approved")
-      expect(@application_1.approved_pet).to eq(@pet_1)
     end
   end
 end 
