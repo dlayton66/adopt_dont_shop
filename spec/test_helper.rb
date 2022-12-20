@@ -1,3 +1,10 @@
+def seed_all
+  seed_shelters
+  seed_applications
+  seed_pets
+  seed_application_pets
+end
+
 def seed_shelters
   @shelter_1 = Shelter.create!(
     foster_program: true,
@@ -83,7 +90,7 @@ def seed_pets
   @pet_3 = Pet.create!(
     name: "Pumba", 
     adoptable: true, 
-    age: 14, 
+    age: 7, 
     breed: "Corgi", 
     shelter_id: @shelter_2.id
   )
@@ -91,9 +98,17 @@ def seed_pets
   @pet_4 = Pet.create!( 
     name: "Timon", 
     adoptable: true, 
-    age: 14, 
+    age: 7, 
     breed: "Dacshund", 
     shelter_id: @shelter_3.id
+  )
+
+  @pet_5 = Pet.create!(
+    name: "Pepperoni",
+    adoptable: true,
+    age: 2,
+    breed: "Corgi",
+    shelter_id: @shelter_1.id
   )
 
   def seed_application_pets
