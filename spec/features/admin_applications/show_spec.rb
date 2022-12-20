@@ -6,15 +6,7 @@ RSpec.describe 'AdminApplication show page' do
     seed_shelters
     seed_pets
     seed_applications
-
-    ApplicationPet.create!(
-      application: @application_1, 
-      pet: @pet_1
-    )
-    ApplicationPet.create!(
-      application: @application_1, 
-      pet: @pet_2
-    )
+    seed_application_pets
   end
 
   describe 'User story 12' do
@@ -122,6 +114,32 @@ RSpec.describe 'AdminApplication show page' do
         expect(page).to have_button('Approve')
         expect(page).to have_button('Reject')
       end
+    end
+  end
+
+#   15. All Pets Accepted on an Application
+
+# As a visitor
+# When I visit an admin application show page
+# And I approve all pets for an application
+# Then I am taken back to the admin application show page
+# And I see the application's status has changed to "Approved"
+
+  describe 'User Story 15' do
+    it 'updates the status of the application to approved' do
+      visit "/admin/applications/#{@application_2.id}"
+
+      expect(page).to have_content("Application status: Pending")
+
+      within("#pet-#{@pet_3.id}") do
+        click_button('Approve')
+      end
+
+      within("#pet-#{@pet_5.id}") do
+        click_button('Approve')
+      end
+
+      expect(page).to have_content("Application status: Approved")
     end
   end
 end 

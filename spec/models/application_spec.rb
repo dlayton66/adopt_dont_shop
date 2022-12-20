@@ -3,50 +3,8 @@ require 'test_helper'
 
 RSpec.describe Application, type: :model do
   before :each do
-    @shelter_1 = Shelter.create!(
-      foster_program: true,
-      name: "Healthy Paws",
-      city: "Denver",
-      rank: 3
-    )
-
-    @application_1 = Application.create!(
-      name: "Bob",
-      street_address: "123 Leaf Street",
-      city: "Denver",
-      state: "CO",
-      zip_code: 80020
-    )
-
-    @application_2 = Application.create!(
-      name: "Tom",
-      street_address: "508 Maple Street",
-      city: "Denver",
-      state: "CO",
-      zip_code: 80020,
-      description: "Love animals",
-      status: "Pending"
-    )
-  
-    @application_3 = Application.create!(
-      name: "Sam",
-      street_address: "8591 Pine Street",
-      city: "Denver",
-      state: "CO",
-      zip_code: 80021,
-      description: "Have a large yard for a furbaby",
-      status: "Pending"
-    )
-  
-    @application_4 = Application.create!(
-      name: "Susan",
-      street_address: "2210 Palm Street",
-      city: "Denver",
-      state: "CO",
-      zip_code: 80240,
-      description: "Looking for a running  buddy",
-      status: "In Progress"
-    )
+    seed_shelters
+    seed_applications
   end
 
   describe "relationships" do
@@ -93,7 +51,24 @@ RSpec.describe Application, type: :model do
 
   describe "#update_status" do
     it 'checks to see if application can be approved or rejected' do
-      
+      seed_pets
+      seed_application_pets
+
+      @application_2.update_status
+      expect(@application_2.status).to eq("Pending")
+
+      # Application 2 Pets
+      @application_pet_3.update(status: "Approved")
+      @application_pet_5.update(status: "Approved")
+      # Application 3 Pets
+      @application_pet_4.update(status: "Approved")
+      @application_pet_6.update(status: "Rejected")
+
+      @application_2.update_status
+      @application_3.update_status
+
+      expect(@application_2.status).to eq("Approved")
+      expect(@application_3.status).to eq("Rejected")
     end
   end
 end 

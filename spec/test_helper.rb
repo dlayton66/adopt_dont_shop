@@ -111,6 +111,14 @@ def seed_pets
     shelter_id: @shelter_1.id
   )
 
+  @pet_6 = Pet.create!(
+    name: "Lemonpop",
+    adoptable: true,
+    age: 1,
+    breed: "Golden",
+    shelter_id: @shelter_2.id
+  )
+
   def seed_application_pets
     @application_pet_1 = ApplicationPet.create!(
       application: @application_1, 
@@ -130,6 +138,16 @@ def seed_pets
     @application_pet_4 = ApplicationPet.create!(
       application: @application_3, 
       pet: @pet_4
+    )
+
+    @application_pet_5 = ApplicationPet.create!(
+      application: @application_2, 
+      pet: @pet_5
+    )
+
+    @application_pet_6 = ApplicationPet.create!(
+      application: @application_3, 
+      pet: @pet_6
     )
   end
 end
