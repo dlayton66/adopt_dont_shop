@@ -3,19 +3,17 @@
 <p><i>Address: </i><%= @application.full_address %></p>
 <p><i>Description: </i><%= @application.description %></p>
 <p><i>Application status: </i><%= @application.status %></p>
+<p><i>Pets applying for:</i></p>
 
-<p>Pets applying for: </p>
 <% @application_pets.each do |pet| %>
   <section id='pet-<%= pet.id %>'>
-    <p><%= link_to pet.name, "/pets/#{pet.id}" %></p> 
+    <p style="display:inline;"><%= link_to pet.name, "/pets/#{pet.id}" %></p>&ensp;
     <% if pet.pet_approved(@application.id) == 'Pending' %>
-      <%= button_to 'Approve', "/admin/applications/#{@application.id}?pet_id=#{pet.id}&status=Approved", :method => :patch %>
-      <br>
-      <%= button_to 'Reject', "/admin/applications/#{@application.id}?pet_id=#{pet.id}&status=Rejected", :method => :patch %>
-    <% else %>  
+      <%= button_to 'Approve', "/admin/applications/#{@application.id}?pet_id=#{pet.id}&status=Approved", :method => :patch , form_class: "myButton" %>
+      <%= button_to 'Reject', "/admin/applications/#{@application.id}?pet_id=#{pet.id}&status=Rejected", :method => :patch, form_class: "myButton" %>
     <% end %>
 
-      <p> <%= pet.name %>'s application status is now: <%= pet.pet_approved(@application.id) %></p>
+      <p><i>Pet status:</i> <%= pet.pet_approved(@application.id) %></p>
   </section>
 <% end %>
 

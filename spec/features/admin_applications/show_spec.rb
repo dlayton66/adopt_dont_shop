@@ -47,7 +47,7 @@ RSpec.describe 'AdminApplication show page' do
       within("#pet-#{@pet_1.id}") do
         expect(page).to_not have_button('Approve')
         expect(page).to have_content(@pet_1.name)
-        expect(page).to have_content("#{@pet_1.name}'s application status is now: Approved")
+        expect(page).to have_content("Pet status: Approved")
         @pet_1.reload
       end
       
@@ -58,7 +58,7 @@ RSpec.describe 'AdminApplication show page' do
       within("#pet-#{@pet_2.id}") do
         expect(page).to_not have_button('Approve')
         expect(page).to have_content(@pet_2.name)
-        expect(page).to have_content("#{@pet_2.name}'s application status is now: Approved")
+        expect(page).to have_content("Pet status: Approved")
         @pet_2.reload
       end
     end
