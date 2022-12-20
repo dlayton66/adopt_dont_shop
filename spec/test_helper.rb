@@ -118,18 +118,18 @@ def seed_pets
     )
     
     @application_pet_2 = ApplicationPet.create!(
-      application: @application_2, 
+      application: @application_1, 
       pet: @pet_2
     )
 
     @application_pet_3 = ApplicationPet.create!(
-      application: @application_3, 
+      application: @application_2, 
       pet: @pet_3
     )
 
     @application_pet_4 = ApplicationPet.create!(
-      application: @application_4, 
-      pet: @pet_1
+      application: @application_3, 
+      pet: @pet_4
     )
   end
 end

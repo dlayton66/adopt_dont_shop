@@ -90,4 +90,10 @@ RSpec.describe Application, type: :model do
       expect(@application_1.has_pets?).to be true
     end
   end
+
+  describe "#update_status" do
+    it 'checks to see if application can be approved or rejected' do
+      
+    end
+  end
 end 

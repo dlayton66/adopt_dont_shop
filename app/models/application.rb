@@ -17,4 +17,8 @@ class Application < ApplicationRecord
   def has_pets?
     !pets.empty?
   end
+
+  def update_status
+
+  end
 end
