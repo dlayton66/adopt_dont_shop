@@ -14,4 +14,14 @@ RSpec.describe "admin shelter show page" do
       expect(page).to have_content(@shelter_1.full_address)
     end
   end
+
+  describe "User Story 22" do
+    it 'has a section for statistics' do
+      visit "/admin/shelters/#{@shelter_1.id}"
+
+      within("#stats") do
+        expect(page).to have_content(@shelter_1.average_pet_age)
+      end
+    end
+  end
 end

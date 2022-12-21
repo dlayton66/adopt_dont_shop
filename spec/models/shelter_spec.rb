@@ -58,6 +58,14 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.find_shelters_with_pending).to eq([@shelter_1, @shelter_3])
       end
     end
+
+    describe "#average_pet_age" do
+      it 'returns the average pet age for the shelter' do
+        expect(@shelter_1.average_pet_age.round(2)).to eq(4.33)
+        expect(@shelter_2.average_pet_age).to be nil
+        expect(@shelter_3.average_pet_age).to eq(8)
+      end
+    end
   end
 
   describe 'instance methods' do
