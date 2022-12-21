@@ -13,7 +13,7 @@ class Pet < ApplicationRecord
     where(adoptable: true)
   end
 
-  def pet_approved(application_id)
+  def application_status(application_id)
     ApplicationPet.find_by(pet_id: self.id, application_id: application_id).status
   end
 end

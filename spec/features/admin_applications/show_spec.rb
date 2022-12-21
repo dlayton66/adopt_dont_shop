@@ -3,10 +3,7 @@ require 'test_helper'
 
 RSpec.describe 'AdminApplication show page' do
   before :each do
-    seed_shelters
-    seed_pets
-    seed_applications
-    seed_application_pets
+    seed_all
   end
 
   describe 'User story 12' do
@@ -150,6 +147,33 @@ RSpec.describe 'AdminApplication show page' do
       end
 
       expect(page).to have_content("Application status: Rejected")
+    end
+  end
+
+  describe "User Story 18" do
+    it 'adds a note if pet has already been approved on another application' do
+      ApplicationPet.create!(
+        application: @application_1,
+        pet: @pet_3
+      )
+
+      visit "/admin/applications/#{@application_2.id}"
+
+      within("#pet-#{@pet_3.id}") do
+        click_button('Approve')
+      end
+
+      within("#pet-#{@pet_5.id}") do
+        click_button('Approve')
+      end
+      
+      visit "/admin/applications/#{@application_1.id}"
+
+      within("#pet-#{@pet_3.id}") do
+        expect(page).to_not have_button('Approve')
+        expect(page).to have_button('Reject')
+        expect(page).to have_content('Approved Elsewhere')
+      end
     end
   end
 end 

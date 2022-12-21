@@ -122,7 +122,7 @@ def seed_pets
   def seed_application_pets
     @application_pet_1 = ApplicationPet.create!(
       application: @application_1, 
-      pet:@pet_1
+      pet: @pet_1
     )
     
     @application_pet_2 = ApplicationPet.create!(
