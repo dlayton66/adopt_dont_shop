@@ -1,8 +1,9 @@
-<h1><%= @pet.name %></h1>
-<h3><%= @pet.age %> years old</h3>
-<h3><%= @pet.breed %></h3>
-<h3><%= @pet.adoptable %></h3>
-<h3><%= @pet.shelter_name %></h3>
+<h1 style="display:inline;"><%= @pet.name %></h1>&ensp;
+<%= button_to "Update", "/pets/#{@pet.id}/edit", method: :get, form_class: "myButton" %>
+<%= button_to "Delete", "/pets/#{@pet.id}", method: :delete, form_class: "myButton" %>
 
-<p><%= link_to "Update #{@pet.name}", "pets/#{@pet.id}/edit" %></p>
-<p><%= link_to "Delete #{@pet.name}", "/pets/#{@pet.id}", method: :delete %></p>
+<h3>Age: <%= @pet.age %> years old</h3>
+<h3>Breed: <%= @pet.breed %></h3>
+<h3>Adoptable: <%= @pet.adoptable %></h3>
+<h3>Shelter: <%= @pet.shelter_name %></h3>
+

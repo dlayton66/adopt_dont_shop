@@ -27,6 +27,7 @@ class Application < ApplicationRecord
 
     if pet_statuses.count == 1 && pet_statuses[0] == "Approved"
       self.status = "Approved"
+      pets.update(adoptable: false)
     elsif pet_statuses.include?("Rejected")
       self.status = "Rejected"
     end

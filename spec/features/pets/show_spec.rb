@@ -1,7 +1,8 @@
 require 'rails_helper'
+require 'test_helper'
 
-RSpec.describe 'the shelter show' do
-  it "shows the shelter and all it's attributes" do
+RSpec.describe 'pet show page' do
+  it "shows the pet and all it's attributes" do
     shelter = Shelter.create(name: 'Mystery Building', city: 'Irvine CA', foster_program: false, rank: 9)
     pet = Pet.create(name: 'Scooby', age: 2, breed: 'Great Dane', adoptable: true, shelter_id: shelter.id)
 
@@ -20,9 +21,36 @@ RSpec.describe 'the shelter show' do
 
     visit "/pets/#{pet.id}"
 
-    click_on("Delete #{pet.name}")
+    click_on("Delete")
 
     expect(page).to have_current_path('/pets')
     expect(page).to_not have_content(pet.name)
+  end
+
+  describe "User Story 17" do
+    it 'sets adoptable to false if all pets are approved' do
+      seed_all
+
+      visit "/admin/applications/#{@application_2.id}"
+
+      expect(page).to have_content("Application status: Pending")
+
+      within("#pet-#{@pet_3.id}") do
+        click_button('Approve')
+      end
+
+      within("#pet-#{@pet_5.id}") do
+        click_button('Approve')
+      end
+
+      visit "/pets/#{@pet_3.id}"
+
+      expect(page).to have_content("Adoptable: false")
+
+      visit "/pets/#{@pet_5.id}"
+
+      expect(page).to have_content("Adoptable: false")
+    end
+
   end
 end
