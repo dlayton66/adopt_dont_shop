@@ -117,14 +117,6 @@ RSpec.describe 'AdminApplication show page' do
     end
   end
 
-#   15. All Pets Accepted on an Application
-
-# As a visitor
-# When I visit an admin application show page
-# And I approve all pets for an application
-# Then I am taken back to the admin application show page
-# And I see the application's status has changed to "Approved"
-
   describe 'User Story 15' do
     it 'updates the status of the application to approved' do
       visit "/admin/applications/#{@application_2.id}"
@@ -140,6 +132,33 @@ RSpec.describe 'AdminApplication show page' do
       end
 
       expect(page).to have_content("Application status: Approved")
+    end
+  end
+
+#   16. One or More Pets Rejected on an Application
+
+# As a visitor
+# When I visit an admin application show page
+# And I reject one or more pets for the application
+# And I approve all other pets on the application
+# Then I am taken back to the admin application show page
+# And I see the application's status has changed to "Rejected"
+
+  describe "User Story 16" do
+    it 'updates the status of the application to rejected' do
+      visit "/admin/applications/#{@application_3.id}"
+
+      expect(page).to have_content("Application status: Pending")
+
+      within("#pet-#{@pet_4.id}") do
+        click_button('Approve')
+      end
+
+      within("#pet-#{@pet_6.id}") do
+        click_button('Reject')
+      end
+
+      expect(page).to have_content("Application status: Rejected")
     end
   end
 end 
