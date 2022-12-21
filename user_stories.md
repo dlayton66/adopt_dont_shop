@@ -1,21 +1,3 @@
-Database Logic Part 2
-
-These stories emphasize SQL and ActiveRecord concepts.
-
-[ ] done
-
-SQL Only Story
-
-For this story, you should write your queries in raw sql. You can use the ActiveRecord find_by_sql method to execute raw sql queries: https://guides.rubyonrails.org/active_record_querying.html#finding-by-sql
-
-
-
-ActiveRecord
-
-For the following stories, you should fully leverage ActiveRecord methods in your queries.
-
-[ ] done
-
 20. Shelters with Pending Applications Listed Alphabetically
 
 As a visitor
