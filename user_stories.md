@@ -1,15 +1,3 @@
-[ ] done
-
-18. Pets can only have one approved application on them at any time
-
-As a visitor
-When a pet has an "Approved" application on them
-And when the pet has a "Pending" application on them
-And I visit the admin application show page for the pending application
-Then next to the pet I do not see a button to approve them
-And instead I see a message that this pet has been approved for adoption
-And I do see a button to reject them
-
 Database Logic Part 2
 
 These stories emphasize SQL and ActiveRecord concepts.
@@ -20,13 +8,7 @@ SQL Only Story
 
 For this story, you should write your queries in raw sql. You can use the ActiveRecord find_by_sql method to execute raw sql queries: https://guides.rubyonrails.org/active_record_querying.html#finding-by-sql
 
-19. Admin Shelters Show Page
 
-As a visitor
-When I visit an admin shelter show page
-Then I see that shelter's name and full address
-
-NOTE: Your query should only return the necessary data to complete the story
 
 ActiveRecord
 

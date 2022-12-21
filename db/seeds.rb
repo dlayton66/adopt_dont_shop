@@ -14,21 +14,21 @@ Shelter.destroy_all
 @shelter_1 = Shelter.create!(
   foster_program: true,
   name: "Healthy Paws",
-  city: "Denver",
+  full_address: "123 Penn St, Denver, CO 80218",
   rank: 3
 )
 
 @shelter_2 = Shelter.create!(
   foster_program: true,
   name: "Ruff Day",
-  city: "Detroit",
+  full_address: "1600 Greenleaf Ave, Detroit, MI 55442",
   rank: 2
 )
 
 @shelter_3 = Shelter.create!(
   foster_program: true,
   name: "AAA Shelter",
-  city: "Houston",
+  full_address: "444 Cowboy St, Houston, TX 75120",
   rank: 1
 )
 

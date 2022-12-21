@@ -9,15 +9,15 @@ RSpec.describe Shelter, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:full_address) }
     it { should validate_presence_of(:rank) }
     it { should validate_numericality_of(:rank) }
   end
 
   before(:each) do
-    @shelter_1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
-    @shelter_2 = Shelter.create!(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
-    @shelter_3 = Shelter.create!(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
+    @shelter_1 = Shelter.create!(name: 'Aurora shelter', full_address: 'Aurora, CO', foster_program: false, rank: 9)
+    @shelter_2 = Shelter.create!(name: 'RGV animal shelter', full_address: 'Harlingen, TX', foster_program: false, rank: 5)
+    @shelter_3 = Shelter.create!(name: 'Fancy pets of Colorado', full_address: 'Denver, CO', foster_program: true, rank: 10)
 
     @pet_1 = @shelter_1.pets.create!(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: false)
     @pet_2 = @shelter_1.pets.create!(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
@@ -53,9 +53,9 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
-    describe '#find_shelters_from_application' do
-      it 'returns shelters for a given application' do
-        expect(Shelter.find_shelters_from_application).to eq([@shelter_1.name, @shelter_3.name])
+    describe '#find_shelters_with_pending' do
+      it 'returns shelters which have an application' do
+        expect(Shelter.find_shelters_with_pending).to eq([@shelter_1.name, @shelter_3.name])
       end
     end
   end

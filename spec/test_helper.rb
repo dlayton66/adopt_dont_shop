@@ -9,21 +9,21 @@ def seed_shelters
   @shelter_1 = Shelter.create!(
     foster_program: true,
     name: "Healthy Paws",
-    city: "Denver",
+    full_address: "123 Penn St, Denver, CO 80218",
     rank: 3
   )
 
   @shelter_2 = Shelter.create!(
     foster_program: true,
     name: "Ruff Day",
-    city: "Detroit",
+    full_address: "1600 Greenleaf Ave, Detroit, MI 55442",
     rank: 2
   )
 
   @shelter_3 = Shelter.create!(
     foster_program: true,
     name: "AAA Shelter",
-    city: "Houston",
+    full_address: "444 Cowboy St, Houston, TX 75120",
     rank: 1
   )
 end
@@ -65,11 +65,13 @@ def seed_applications
     city: "Denver",
     state: "CO",
     zip_code: 80240,
-    # description: "Looking for a running  buddy",
+    # description: "Looking for a running buddy",
     status: "In Progress"
   )
 end
-
+  # application_1: pet_1(1), pet_2(1)
+  # application_2: pet_3(2), pet_5(1)
+  # application_3: pet_4(3), pet_6(2)
 def seed_pets
   @pet_1 = Pet.create!(
     name: "Pepper",

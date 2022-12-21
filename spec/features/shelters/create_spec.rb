@@ -7,7 +7,7 @@ RSpec.describe 'shelter creation' do
 
       expect(page).to have_content('New Shelter')
       expect(find('form')).to have_content('Name')
-      expect(find('form')).to have_content('City')
+      expect(find('form')).to have_content('Full address')
       expect(find('form')).to have_content('Rank')
       expect(find('form')).to have_content('Foster program')
     end
@@ -19,7 +19,7 @@ RSpec.describe 'shelter creation' do
         visit '/shelters/new'
 
         fill_in 'Name', with: 'Houston Shelter'
-        fill_in 'City', with: 'Houston'
+        fill_in 'Full address', with: 'Houston'
         check 'Foster program'
         fill_in 'Rank', with: 7
         click_button 'Save'
@@ -34,7 +34,7 @@ RSpec.describe 'shelter creation' do
         visit '/shelters/new'
         click_button 'Save'
 
-        fill_in 'City', with: 'Houston'
+        fill_in 'Full address', with: 'Houston'
 
         expect(page).to have_content("Error: Name can't be blank, Rank can't be blank, Rank is not a number")
         expect(page).to have_current_path('/shelters/new')

@@ -1,7 +1,7 @@
 class Shelter < ApplicationRecord
   validates :name, presence: true
   validates :rank, presence: true, numericality: true
-  validates :city, presence: true
+  validates :full_address, presence: true
   has_many :pets, dependent: :destroy
   has_many :application_pets, through: :pets
   has_many :applications, through: :application_pets
@@ -33,7 +33,7 @@ class Shelter < ApplicationRecord
     adoptable_pets.where('age >= ?', age_filter)
   end
 
-  def self.find_shelters_from_application
-    joins(pets: :applications).where("applications.status = 'Pending'").order(:name).pluck(:name)
+  def self.find_shelters_with_pending
+    joins(pets: :applications).where("applications.status = 'Pending'").distinct.order(:name).pluck(:name)
   end
 end
