@@ -55,7 +55,7 @@ RSpec.describe Shelter, type: :model do
 
     describe '#find_shelters_with_pending' do
       it 'returns shelters which have an application' do
-        expect(Shelter.find_shelters_with_pending).to eq([@shelter_1.name, @shelter_3.name])
+        expect(Shelter.find_shelters_with_pending).to eq([@shelter_1, @shelter_3])
       end
     end
   end

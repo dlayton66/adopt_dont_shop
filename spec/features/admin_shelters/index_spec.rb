@@ -44,4 +44,20 @@ RSpec.describe "Admin Shelters Index" do
       end
     end
   end
+
+  describe "User Story 21" do
+    it 'links every shelter to its admin shelter show page' do
+      visit "/admin/shelters"
+
+      within("#shelters") do
+        expect(page).to have_link(@shelter_1.name, href: "/admin/shelters/#{@shelter_1.id}")
+        expect(page).to have_link(@shelter_2.name, href: "/admin/shelters/#{@shelter_2.id}")
+      end
+
+      within("#pending") do
+        expect(page).to have_link(@shelter_1.name, href: "/admin/shelters/#{@shelter_1.id}")
+        expect(page).to have_link(@shelter_2.name, href: "/admin/shelters/#{@shelter_2.id}")
+      end
+    end
+  end
 end
