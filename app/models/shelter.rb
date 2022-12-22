@@ -26,7 +26,11 @@ class Shelter < ApplicationRecord
   end
 
   def adopted_pets
-    pets.joins(:applications).where("applications.status = 'Approved'")
+    pets.joins(:applications).where("applications.status = 'Approved'").distinct
+  end
+
+  def pending_pets
+    pets.joins(:application_pets).where("application_pets.status = 'Pending'").distinct
   end
 
   def alphabetical_pets

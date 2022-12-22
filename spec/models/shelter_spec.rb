@@ -32,6 +32,8 @@ RSpec.describe Shelter, type: :model do
     @application_pet_1 = ApplicationPet.create!(application: @application_1, pet: @pet_1)
     @application_pet_2 = ApplicationPet.create!(application: @application_2, pet: @pet_3)
     @application_pet_3 = ApplicationPet.create!(application: @application_3, pet: @pet_2)
+    @application_pet_4 = ApplicationPet.create!(application: @application_4, pet: @pet_4)
+    @application_pet_5 = ApplicationPet.create!(application: @application_2, pet: @pet_1)
   end
 
   describe 'class methods' do
@@ -84,6 +86,24 @@ RSpec.describe Shelter, type: :model do
         expect(@shelter_1.adopted_pets).to eq([@pet_1, @pet_2])
         expect(@shelter_2.adopted_pets).to eq([])
         expect(@shelter_3.adopted_pets).to eq([@pet_3])
+      end
+    end
+
+    describe '.pending_pets' do
+      it 'returns pets which are pending' do
+        expect(@shelter_1.pending_pets).to eq([@pet_1, @pet_2, @pet_4])
+
+        @application_pet_1.update(status: 'Approved')
+
+        expect(@shelter_1.pending_pets).to eq([@pet_1, @pet_2, @pet_4])
+
+        @application_pet_5.update(status: 'Approved')
+
+        expect(@shelter_1.pending_pets).to eq([@pet_2, @pet_4])
+
+        @application_pet_3.update(status: 'Approved')
+
+        expect(@shelter_1.pending_pets).to eq([@pet_4])
       end
     end
 

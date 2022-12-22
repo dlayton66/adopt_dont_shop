@@ -56,4 +56,17 @@ RSpec.describe "admin shelter show page" do
       end
     end
   end
+
+  describe "User Story 25" do
+    it 'lists all pets at shelter with pending status' do
+      visit "/admin/shelters/#{@shelter_1.id}"
+
+      within("#action_required") do
+        expect(page).to have_content("Action Required")
+        @shelter_1.pending_pets.each do |pet|
+          expect(page).to have_content(pet.name)
+        end
+      end
+    end
+  end
 end
