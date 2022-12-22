@@ -1,12 +1,3 @@
-23. Count of Adoptable Pets
-
-As a visitor
-When I visit an admin shelter show page
-Then I see a section for statistics
-And in that section I see the number of pets at that shelter that are adoptable
-
-[ ] done
-
 24. Count of Pets that have been Adopted
 
 As a visitor

@@ -75,6 +75,18 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
+    describe '.adopted_pets' do
+      it 'returns which pets were adopted as part of approved application' do
+        @application_1.update(status: "Approved")
+        @application_2.update(status: "Approved")
+        @application_3.update(status: "Approved")
+
+        expect(@shelter_1.adopted_pets).to eq([@pet_1, @pet_2])
+        expect(@shelter_2.adopted_pets).to eq([])
+        expect(@shelter_3.adopted_pets).to eq([@pet_3])
+      end
+    end
+
     describe '.alphabetical_pets' do
       it 'returns pets associated with the given shelter in alphabetical name order' do
         expect(@shelter_1.alphabetical_pets).to eq([@pet_4, @pet_2])
