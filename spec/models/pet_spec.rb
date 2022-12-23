@@ -55,6 +55,22 @@ RSpec.describe Pet, type: :model do
         expect(@pet_3.application_status(@application_2.id)).to eq('Accepted')
       end
     end
+
+    describe '.pending_application_pets' do
+      it 'returns pending application pets associated with pet' do
+        seed_all
+
+        expect(@pet_1.pending_application_pets).to eq([@application_pet_1, @application_pet_7])
+      end
+    end
+
+    describe '.pending_applications' do
+      it 'returns pending applications associated with pet' do
+        seed_all
+
+        expect(@pet_1.pending_applications).to eq([@application_1, @application_2])
+      end
+    end
   end
 
 end

@@ -60,6 +60,7 @@ RSpec.describe Application, type: :model do
       # Application 2 Pets
       @application_pet_3.update(status: "Approved")
       @application_pet_5.update(status: "Approved")
+      @application_pet_7.update(status: "Approved")
       # Application 3 Pets
       @application_pet_4.update(status: "Approved")
       @application_pet_6.update(status: "Rejected")

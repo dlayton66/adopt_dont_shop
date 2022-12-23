@@ -83,10 +83,6 @@ RSpec.describe 'AdminApplication show page' do
     it "has individual approve/reject attributes for every application's pets" do
       ApplicationPet.create!(
         application: @application_2, 
-        pet: @pet_1
-      )
-      ApplicationPet.create!(
-        application: @application_2, 
         pet: @pet_2
       )
 
@@ -119,6 +115,10 @@ RSpec.describe 'AdminApplication show page' do
       visit "/admin/applications/#{@application_2.id}"
 
       expect(page).to have_content("Application status: Pending")
+
+      within("#pet-#{@pet_1.id}") do
+        click_button('Approve')
+      end
 
       within("#pet-#{@pet_3.id}") do
         click_button('Approve')
@@ -158,6 +158,10 @@ RSpec.describe 'AdminApplication show page' do
       )
 
       visit "/admin/applications/#{@application_2.id}"
+
+      within("#pet-#{@pet_1.id}") do
+        click_button('Approve')
+      end
 
       within("#pet-#{@pet_3.id}") do
         click_button('Approve')

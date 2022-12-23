@@ -69,4 +69,15 @@ RSpec.describe "admin shelter show page" do
       end
     end
   end
+
+  describe "User Story 26" do
+    it 'has link to admin application page for pending pets' do
+      visit "/admin/shelters/#{@shelter_1.id}"
+
+      within('#action_required') do
+        expect(page).to have_link('Bob', href: "/admin/applications/#{@application_1.id}")
+        expect(page).to have_link('Tom', href: "/admin/applications/#{@application_2.id}")
+      end
+    end
+  end
 end

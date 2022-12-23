@@ -31,6 +31,10 @@ RSpec.describe 'pet show page' do
 
       expect(page).to have_content("Application status: Pending")
 
+      within("#pet-#{@pet_1.id}") do
+        click_button('Approve')
+      end
+
       within("#pet-#{@pet_3.id}") do
         click_button('Approve')
       end

@@ -151,5 +151,10 @@ def seed_pets
       application: @application_3, 
       pet: @pet_6
     )
+
+    @application_pet_7 = ApplicationPet.create!(
+      application: @application_2, 
+      pet: @pet_1
+    )
   end
 end
